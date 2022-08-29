@@ -17,11 +17,15 @@
     ></script>
 
     <script>
-        const socket = io('http://localhost:8080/');
+      const socket = io('http://localhost:8080/');
 
-        socket.on('mensaje-bienvenida', (data) => {
-          console.log(data);
-        });
+      socket.on('mensaje-bienvenida', (data) => {
+        console.log(data);
+      });
+
+      setTimeout(() => {
+        socket.emit('mensaje-cliente', { msg: 'cliente', nombre: 'Maximiliano' });
+      }, 2000);
     </script>
   </body>
 </html>

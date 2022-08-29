@@ -13,6 +13,13 @@ io.on('connection', (socket) => {
         msg: 'Bienvenido al server',
         fecha: new Date()
     });
+
+    // escuchar el evento
+    // mensaje-cliente
+    // console.log(data);
+    socket.on('mensaje-cliente', (data) => {
+        console.log(data);
+    });
 });
 
 server.listen(8080, () => {
