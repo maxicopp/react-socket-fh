@@ -1,29 +1,23 @@
+const Server = require("./models/server");
 
-const express = require('express');
-const app = express()
+const server = new Server();
 
-const server = require('http').createServer(app)
+server.execute();
 
-const io = require('socket.io')(server)
+// io.on('connection', (socket) => {
+//     // socket.emit('mensaje-bienvenida', {
+//     //     msg: 'Bienvenido al server',
+//     //     fecha: new Date()
+//     // });
 
-app.use(express.static(__dirname + '/public'));
+//     // escuchar el evento
+//     // mensaje-cliente
+//     // console.log(data);
+//     socket.on('mensaje-to-server', (data) => {
+//         console.log(data);
 
-io.on('connection', (socket) => {
-    // socket.emit('mensaje-bienvenida', {
-    //     msg: 'Bienvenido al server',
-    //     fecha: new Date()
-    // });
+//         io.emit('mensaje-from-server', data);
+//     });
+// });
 
-    // escuchar el evento
-    // mensaje-cliente
-    // console.log(data);
-    socket.on('mensaje-to-server', (data) => {
-        console.log(data);
 
-        io.emit('mensaje-from-server', data);
-    });
-});
-
-server.listen(8080, () => {
-    console.log('Server corriendo en puerto :8080')
-});
