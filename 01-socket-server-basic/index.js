@@ -9,16 +9,18 @@ const io = require('socket.io')(server)
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', (socket) => {
-    socket.emit('mensaje-bienvenida', {
-        msg: 'Bienvenido al server',
-        fecha: new Date()
-    });
+    // socket.emit('mensaje-bienvenida', {
+    //     msg: 'Bienvenido al server',
+    //     fecha: new Date()
+    // });
 
     // escuchar el evento
     // mensaje-cliente
     // console.log(data);
-    socket.on('mensaje-cliente', (data) => {
+    socket.on('mensaje-to-server', (data) => {
         console.log(data);
+
+        io.emit('mensaje-from-server', data);
     });
 });
 
