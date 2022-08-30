@@ -3,6 +3,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
 
+const Sockets = require('./sockets');
+
 class Server {
     constructor() {
         this.app = express();
@@ -20,7 +22,7 @@ class Server {
     }
 
     configurarSockets() {
-
+        new Sockets(this.io);
     }
 
     execute() {
