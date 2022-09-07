@@ -5,7 +5,22 @@ export const BandList = ({ data }) => {
 
     useEffect(() => {
         setBands(data);
-    }, [data])
+    }, [data]);
+
+    const changeName = (event, id) => {
+        const newName = event.target.value;
+        setBands(bands => bands.map(band => {
+            if (band.id === id) {
+                band.name = newName;
+            }
+            return band;
+        }));
+    }
+
+    const onLostFocus = (id, name) => {
+        console.log({ id, name });
+        // TODO: Disparar el evento de sockets
+    }
 
     const createRows = () => {
         return (
@@ -19,9 +34,11 @@ export const BandList = ({ data }) => {
                             type="text"
                             className="form-control"
                             value={band.name}
+                            onChange={(event) => changeName(event, band.id)}
+                            onBlur={() => onLostFocus(band.id, band.name)}
                         />
                     </td>
-                    <td><h3>15</h3></td>
+                    <td><h3>{band.votes}</h3></td>
                     <td>
                         <button className="btn btn-danger">Borrar</button>
                     </td>
