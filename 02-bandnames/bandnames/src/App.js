@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-
-
 import { BandAdd } from './components/BandAdd';
 import { BandList } from './components/BandList';
 import { useSocket } from './hooks/useSocket';
