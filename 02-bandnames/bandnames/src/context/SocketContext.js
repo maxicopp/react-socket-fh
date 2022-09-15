@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import React, { createContext } from 'react';
 import { useSocket } from '../hooks/useSocket';
 
 export const SocketContext = createContext();

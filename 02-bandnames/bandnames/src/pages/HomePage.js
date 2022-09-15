@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { BandAdd } from '../components/BandAdd';
 import { BandChart } from '../components/BandChart';
 import { BandList } from '../components/BandList';
