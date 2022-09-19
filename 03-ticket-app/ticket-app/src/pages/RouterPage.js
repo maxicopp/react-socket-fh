@@ -23,7 +23,7 @@ const RouterPage = () => {
     return (
         <Router>
             <Layout style={{ height: '100vh' }}>
-                <Sider>
+                <Sider collapsedWidth={0} breakpoint="md">
                     <div className="logo" />
                     <Menu
                         theme="dark"
@@ -58,11 +58,18 @@ const RouterPage = () => {
                         }}
                     >
                         <Switch>
-                            <Route path="/ingresar" element={<Ingresar />} />
-                            <Route path="/cola" element={<Cola />} />
-                            <Route path="/crear" element={<CrearTicket />} />
-
-                            <Route path="/escritorio" element={<Escritorio />} />
+                            <Route path="/ingresar">
+                                <Ingresar />
+                            </Route>
+                            <Route path="/cola">
+                                <Cola />
+                            </Route>
+                            <Route path="/crear">
+                                <CrearTicket />
+                            </Route>
+                            <Route path="/escritorio">
+                                <Escritorio />
+                            </Route>
 
                             <Redirect to="/ingresar" />
                         </Switch>
