@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Divider, Form, Input, InputNumber, Typography } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useHideMenu } from '../hooks/useHideMenu';
+import { getUserStorage } from '../helpers/getUserStorage';
 
 const { Title, Text } = Typography;
 
 export const Ingresar = () => {
 
     const history = useHistory();
+    const [usuario] = useState(getUserStorage());
+
     useHideMenu(false);
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
+    const onFinish = ({ agente, escritorio }) => {
+
+        localStorage.setItem('agente', agente);
+        localStorage.setItem('escritorio', escritorio);
+
         history.push('/escritorio');
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    if (usuario.agente && usuario.escritorio) {
+        return <Redirect to="/escritorio" />
+    }
+
     return (
         <>
             <Title level={2}>Ingresar</Title>
