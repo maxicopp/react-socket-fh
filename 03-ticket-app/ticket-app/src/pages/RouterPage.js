@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     UploadOutlined,
     UserOutlined,
@@ -16,14 +16,22 @@ import { Cola } from './Cola';
 import { CrearTicket } from './CrearTicket';
 import { Escritorio } from './Escritorio';
 import { Ingresar } from './Ingresar';
+import { UiContext } from '../context/UiContext';
 
 const { Sider, Content } = Layout;
 
 const RouterPage = () => {
+
+    const { hideMenu } = useContext(UiContext);
+
     return (
         <Router>
             <Layout style={{ height: '100vh' }}>
-                <Sider collapsedWidth={0} breakpoint="md">
+                <Sider
+                    collapsedWidth={0}
+                    breakpoint="md"
+                    hidden={hideMenu}
+                >
                     <div className="logo" />
                     <Menu
                         theme="dark"
