@@ -16,7 +16,7 @@ class Server {
 
         // Http server
         this.server = http.createServer( this.app );
-        
+
         // Configuraciones de sockets
         this.io = socketio( this.server, { /* configuraciones */ } );
     }
