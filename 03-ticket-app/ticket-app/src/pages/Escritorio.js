@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { Button, Col, Divider, Row, Typography } from 'antd';
 import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
-import { useHideMenu } from '../hooks/useHideMenu';
 import { getUserStorage } from '../helpers/getUserStorage';
+import { SocketContext } from '../context/SocketContext';
+import { useHideMenu } from '../hooks/useHideMenu';
 
 const { Title, Text } = Typography;
 
@@ -11,6 +12,8 @@ export const Escritorio = () => {
 
     useHideMenu(false);
     const [usuario] = useState(getUserStorage());
+    const { socket } = useContext(SocketContext);
+    const [ticket, setTicket] = useState(null);
     const history = useHistory();
 
     const salir = () => {
@@ -19,7 +22,10 @@ export const Escritorio = () => {
     }
 
     const siguienteTicket = () => {
-        console.log('siguienteTicket');
+        console.log(usuario);
+        socket.emit('siguiente-ticket-trabajar', usuario, (ticket) => {
+            setTicket(ticket);
+        });
     }
 
     if (!usuario.agente || !usuario.escritorio) {
@@ -49,17 +55,21 @@ export const Escritorio = () => {
 
             <Divider />
 
-            <Row>
-                <Col>
-                    <Text>Está atendiendo el ticket: </Text>
-                    <Text
-                        style={{ fontSize: 30 }}
-                        type="danger"
-                    >
-                        55
-                    </Text>
-                </Col>
-            </Row>
+            {
+                ticket && (
+                    <Row>
+                        <Col>
+                            <Text>Está atendiendo el ticket: </Text>
+                            <Text
+                                style={{ fontSize: 30 }}
+                                type="danger"
+                            >
+                                {ticket.numero}
+                            </Text>
+                        </Col>
+                    </Row>
+                )
+            }
 
             <Row>
                 <Col offset={18} span={6} align="right">
