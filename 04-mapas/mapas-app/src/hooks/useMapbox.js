@@ -24,7 +24,16 @@ export const useMapbox = (puntoInicial) => {
 
             marker.setLngLat([lng, lat]).addTo(mapa.current).setDraggable(true);
 
+            // Asignamos al objeto de marcadores
             marcadores.current[marker.id] = marker;
+
+            // Escuchar movimientos del marcador
+            marker.on('drag', ({ target }) => {
+                const { id } = target;
+                const { lng, lat } = target.getLngLat();
+
+                // TODO: Emitir los cambios del marcador
+            });
         },
         [],
     );
