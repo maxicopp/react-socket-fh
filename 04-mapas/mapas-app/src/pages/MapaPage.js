@@ -25,7 +25,6 @@ export const MapaPage = () => {
         })
     }, [movimientoMarcador$]);
 
-
     return (
         <>
             <div className="info">
