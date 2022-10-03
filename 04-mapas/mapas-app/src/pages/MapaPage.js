@@ -19,29 +19,29 @@ export const MapaPage = () => {
         for (const key of Object.keys(marcadores)) {
             agregarMarcador(marcadores[key], key);
         }
-      })
+      });
     }, [agregarMarcador, socket]);
 
     // Nuevo marcador
     useEffect(() => {
         nuevoMarcador$.subscribe(marcador => {
             socket.emit('marcador-nuevo', marcador);
-        })
+        });
     }, [nuevoMarcador$, socket]);
 
     // Movimiento marcador
     useEffect(() => {
         movimientoMarcador$.subscribe(marcador => {
             // console.log(marcador);
-        })
+        });
     }, [movimientoMarcador$]);
 
     // Escuchar nuevos marcadores
     useEffect(() => {
       socket.on('marcador-nuevo', marcador => {
-        console.log(marcador);
-      })
-    }, [socket]);
+        agregarMarcador(marcador, marcador.id);
+      });
+    }, [agregarMarcador, socket]);
 
     return (
         <>
