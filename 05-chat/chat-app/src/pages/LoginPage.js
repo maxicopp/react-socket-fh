@@ -1,11 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../auth/AuthContext';
 
 export const LoginPage = () => {
 
+    const { login } = useContext(AuthContext);
+
     const [form, setForm] = useState({
-        email: 'test1@test.com',
+        email: 'test1@correo.com',
         password: '123456',
         rememberme: false
     });
@@ -45,7 +48,8 @@ export const LoginPage = () => {
             ? localStorage.setItem('email', form.email)
             : localStorage.removeItem('email');
 
-        // TODO: llamar el backend
+        const { email, password } = form;
+        login(email, password);
     }
 
     return (
