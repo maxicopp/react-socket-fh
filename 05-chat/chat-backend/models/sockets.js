@@ -30,7 +30,9 @@ class Sockets {
             // Marcar en la BD que el usuario se desconectó
 
             // TODO: Emitir todos los usuarios conectados
-
+            socket.on('disconnect', () => {
+                console.log('Cliente desconectado');
+            });
 
         });
     }
